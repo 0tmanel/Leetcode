@@ -14,21 +14,20 @@ int main ()
     unsigned char  j = 17; //00010001
     j = j | (1<< 3);
     printf("%d\n", j);
-    /*i = i | (1 << 3);
+    /* 
+    i = i | (1 << 3);
 This is where the bit manipulation happens. Let’s break it down:
 
 1 << 3:
 The number 1 in binary is 00000001.
 Shifting 1 left by 3 positions (1 << 3) results in:
-csharp
-Copy code
+
+
 00001000  (which is 8 in decimal)
 Now, we perform the bitwise OR (|) operation between i (which is 17 or 00010001) and the result of 1 << 3 (which is 8 or 00001000).
 
 Let's do the bitwise OR operation step by step:
 
-markdown
-Copy code
 00010001  (i = 17)
 OR
 00001000  (1 << 3 = 8)
@@ -46,35 +45,31 @@ This part performs two operations:
 Left shift (1 << 4):
 The binary representation of 1 is 00000001.
 Shifting 1 left by 4 positions (1 << 4) results in:
-csharp
-Copy code
+
+
 00010000  (which is 16 in decimal)
 NOT (~) operation:
 The ~ (bitwise NOT) inverts all the bits of 00010000, turning it into:
-kotlin
-Copy code
+
 11101111  (this is `-17` in two's complement, but we're only interested in the bits)
 So, the result of ~(1 << 4) is:
 
-css
-Copy code
+
 11101111  (a mask where the 4th bit is 0 and all others are 1)
 Bitwise AND Operation (a & ~(1 << 4)):
 
-c
-Copy code
+
 a = a & (~(1 << 4));
 Now, we perform the bitwise AND operation between a (which is 17 or 00010001 in binary) and the result of ~(1 << 4) (which is 11101111 in binary).
 
 Let's do the bitwise AND operation step by step:
 
-markdown
-Copy code
+
 00010001  (a = 17)
 AND
 11101111  (~(1 << 4))
 -----------------------
-00000001  (Result)*/
+00000001  (Result = 1)*/
 
 //
 printf("this result is for the part of reading bits of j\n");

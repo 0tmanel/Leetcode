@@ -1,3 +1,7 @@
+//Bit manipulation generally consists of six activities: setting bits, clearing bits, inverting bits, testing and
+//comparing bits, extracting bits from a bit string, and inserting bits into a bit string.
+
+
 //The result of an AND operation is true only if both input values are true. 
 //The result of an OR operation is true if either input value is true. 
 //The result of a NOT operation is to reverse the bit value
@@ -50,6 +54,7 @@ int main ()
    b=-65; //01000001
    b=b >> 2;
    printf("%d %d\n",a,b);
+   //Right shifting (>> 1) means moving all bits one position to the right.
 
 
 
