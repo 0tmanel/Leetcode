@@ -5,7 +5,7 @@ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit int
 
 You must write an algorithm that runs in O(n) time and without using the division operation.
 
- 
+
 
 Example 1:
 
@@ -15,72 +15,66 @@ Example 2:
 
 Input: nums = [-1,1,0,-3,3]
 Output: [0,0,9,0,0]
- 
+
 
 Constraints:
 
 2 <= nums.length <= 105
 -30 <= nums[i] <= 30
 The input is generated such that answer[i] is guaranteed to fit in a 32-bit integer.
- 
+
 
 Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)
 */
 #include <stdlib.h>
 #include <stdio.h>
+
 void rightarray(int *nums, int numsSize, int* right)
 {
-    int len = numsSize - 1;
-    int i = len;
-    int j = len - 1;
-    right[len] = 1;
-    right[j] = nums[len];
-    int l = len - 2;
-    while (l >= 0)
+    right[numsSize - 1] = 1;
+    for (int i = numsSize - 2; i >= 0; i--)
     {
-        right[l] = nums[i] * nums[j];
-        l--;
-        i--;
-        j--;
-       
-    }
-    int o = 0;
-    while (o < numsSize)
-    {
-        printf("%d", right[o]);
-        o++;
+        right[i] = right[i + 1] * nums[i + 1];
     }
 }
+
 void leftarray(int *nums, int numsSize, int* left)
 {
-    int i = 0;
-    int j = i + 1;
     left[0] = 1;
-    left[1] = nums[0];
-    int l = 2;
-    while (l < numsSize)
+    for (int i = 1; i < numsSize; i++)
     {
-        left[l] = nums[i] * nums[j];
-        l++;
-        i++;
-        j++;
-       
+        left[i] = left[i - 1] * nums[i - 1];
     }
-    
 }
-void productExceptSelf(int* nums, int numsSize, int* returnSize) {
+int* productExceptSelf(int *nums, int numsSize, int *returnSize)
+{
+    int *right = malloc(numsSize * sizeof(int));
     int *left = malloc(numsSize * sizeof(int));
-     int *right = malloc(numsSize * sizeof(int));
+     int *answer = malloc(numsSize * sizeof(int));
     leftarray(nums, numsSize, left);
     rightarray(nums, numsSize, right);
-
+    int i = 0;
+    while(i < numsSize)
+    {
+        answer[i] = left[i] * right[i];
+        i++;
+    }
+    int j = 0;
+    
+    *returnSize = numsSize;
+    return answer;
 }
-int main ()
+int main()
 {
-    int nums[] = {1, 2, 3, 4};
-    int numsSize = 4;
+    int nums[] = {-1,1,0,-3,3};
+    int numsSize = 5;
     int returnSize = 0;
-   //int *array = 
-   productExceptSelf(nums, numsSize, &returnSize);
+    int *array = productExceptSelf(nums, numsSize, &returnSize);
+    int j = 0;
+    while(j < numsSize)
+    {
+        printf("%d", array[j]);
+        j++;
+    }
     printf("\n");
 }
